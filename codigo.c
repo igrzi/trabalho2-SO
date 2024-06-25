@@ -30,7 +30,7 @@ void init_physical_memory(PhysicalMemory *pm, int total_size, int page_size) {
     pm->memory = (unsigned char *)calloc(total_size, sizeof(unsigned char));
     pm->free_frames = (int *)malloc(pm->num_frames * sizeof(int));
     for (int i = 0; i < pm->num_frames; i++) {
-        pm->free_frames[i] = 1; // 1 indicates the frame is free
+        pm->free_frames[i] = 1;
     }
 }
 
@@ -38,7 +38,7 @@ Process create_process(int process_id, int size, int page_size, PhysicalMemory *
     Process p;
     p.process_id = process_id;
     p.size = size;
-    p.num_pages = (size + page_size - 1) / page_size; // Round up
+    p.num_pages = (size + page_size - 1) / page_size;
     p.page_table = (PageTableEntry *)malloc(p.num_pages * sizeof(PageTableEntry));
 
     for (int i = 0; i < p.num_pages; i++) {
@@ -101,7 +101,6 @@ int main() {
     int page_size;
     int max_process_size;
 
-    // Get configurable parameters from user
     printf("Informe o tamanho da memória física: ");
     scanf("%d", &physical_memory_size);
     printf("Informe o tamanho da página (quadro): ");
